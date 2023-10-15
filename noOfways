@@ -1,0 +1,33 @@
+class Solution:
+    def numWays(self, steps: int, arrLen: int) -> int:
+        mod=10**9+7
+        dp={}
+
+        def noOfways(step,idx,l):
+            
+            
+                
+                
+            if idx>=l or idx<0:
+                return 0
+            if step==steps:
+                if idx==0:
+
+                    return 1
+                else:
+                    return 0
+            if (step,idx) in dp:
+                return dp[(step,idx)]
+            
+            
+            stay=noOfways(step+1,idx,l)
+            left=noOfways(step+1,idx-1,l)
+            right=noOfways(step+1,idx+1,l)
+
+            dp[(step,idx)]=stay+left+right
+
+            return dp[(step,idx)]%mod
+        
+        return noOfways(0,0,arrLen)
+
+        
