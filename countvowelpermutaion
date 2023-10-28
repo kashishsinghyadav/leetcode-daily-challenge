@@ -1,0 +1,42 @@
+class Solution:
+    def countVowelPermutation(self, n: int) -> int:
+        mod=10**9+7
+        dic={}
+        def solve(ch,n):
+            nonlocal mod
+            if n==0:
+                return 1
+
+            if (ch,n) in dic:
+                return dic[(ch,n)]
+            
+            res=0
+
+            if ch=='a':
+                dic[(ch,n)]=solve('e',n-1)%mod
+                return  dic[(ch,n)]
+            elif ch=='e':
+                dic[(ch,n)]= (solve('a',n-1)+solve('i',n-1))%mod
+                return dic[(ch,n)]
+            elif ch=='i':
+
+                dic[(ch,n)] =(solve('a',n-1)+solve('e',n-1)+solve('o',n-1)+solve('u',n-1))%mod
+                return dic[(ch,n)]
+            elif ch=='o':
+                dic[(ch,n)]=(solve('i',n-1)+solve('u',n-1))%mod
+                return  dic[(ch,n)]
+
+            else:
+                dic[(ch,n)]=solve('a',n-1)%mod
+                return dic[(ch,n)]
+
+        
+
+        res=0
+        res = (res+solve('a',n-1))%mod
+        res = (res+solve('e',n-1))%mod
+        res = (res+solve('i',n-1))%mod
+        res = (res+solve('o',n-1))%mod
+        res = (res+solve('u',n-1))%mod
+        return res
+
