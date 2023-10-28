@@ -13,4 +13,4 @@ class Solution:
                 ans += t - 1  
             else:
                 last = nums[i]  
-        return ans 
+        return ans  
